@@ -22,7 +22,7 @@ public class ConexionAMYSQL {
     
     
         try {
-            String url ="jdbc:mysql://localhost:3306/laboratorio";
+            String url ="jdbc:mysql://localhost:3306/lab";
             String user="root";
             String password="root";
             
