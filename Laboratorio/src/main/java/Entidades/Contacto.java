@@ -11,42 +11,36 @@ package Entidades;
 public class Contacto {
     
     
-    
-     String Nombre;
-     String Apellido;
-      int Edad;
-     String Email;
-     String NumerodeTelefono;
+    int idContactos;
+    String Nombre;
+    int Edad;
+    String Email;
 
-   
-   
-   
+    public int getIdContactos() {
+        return idContactos;
+    }
+
+    public void setIdContactos(int idContactos) {
+        this.idContactos = idContactos;
+    }
+
     public String getNombre() {
         return Nombre;
     }
-   
-     public void setNombre(String Nombre) {
+
+    public void setNombre(String Nombre) {
         this.Nombre = Nombre;
     }
-    
-     public String getApellido() {
-        return Apellido;
-    }
-   
-   
-    public void setApellido(String Apellido) {
-        this.Apellido = Apellido;
-    }
 
-      public int getEdad() {
+    public int getEdad() {
         return Edad;
     }
 
-      public void setEdad(int Edad) {
+    public void setEdad(int Edad) {
         this.Edad = Edad;
     }
 
-       public String getEmail() {
+    public String getEmail() {
         return Email;
     }
 
@@ -54,25 +48,15 @@ public class Contacto {
         this.Email = Email;
     }
 
-    
-       public String getNumerodeTelefono() {
+    public String getNumerodeTelefono() {
         return NumerodeTelefono;
     }
-   
-  
+
     public void setNumerodeTelefono(String NumerodeTelefono) {
         this.NumerodeTelefono = NumerodeTelefono;
     }
+    String NumerodeTelefono;
 
-  
-    
-  
 
- 
-
-  
- 
- 
-   
    
 }

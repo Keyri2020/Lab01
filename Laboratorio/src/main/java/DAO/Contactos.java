@@ -26,13 +26,13 @@ public class Contactos {
         
         try {
             list = new ArrayList<Contacto>();
-            CallableStatement cb = conexion.prepareCall("select * from Contactos");
+            CallableStatement cb = conexion.prepareCall("select * from contactos");
             ResultSet resultado = cb.executeQuery();
             
             while (resultado.next()){
                 Contacto contact = new Contacto();
                 //llamar a el objeto de entidades
-                
+                contact.setIdContactos(resultado.getInt("Id"));
                 contact.setNombre(resultado.getString("Nombre"));
                 contact.setEdad(resultado.getInt("Edad"));
                 contact.setEmail(resultado.getString("Email"));
@@ -40,6 +40,7 @@ public class Contactos {
                 list.add(contact);
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error" + e.toString());
         }
         
         return list;
