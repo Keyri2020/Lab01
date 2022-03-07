@@ -9,6 +9,7 @@ import Entidades.Contacto;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,7 +22,8 @@ public class FrmConsultaBD extends javax.swing.JFrame {
      */
     public FrmConsultaBD() {
         initComponents();
-            setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        listarDatos();
     }
     
     void limpiar(){
@@ -68,9 +70,19 @@ public class FrmConsultaBD extends javax.swing.JFrame {
 
         btnEliminar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnActualizar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -235,6 +247,11 @@ public class FrmConsultaBD extends javax.swing.JFrame {
         tbContactos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbContactos.setShowGrid(true);
         tbContactos.setVerifyInputWhenFocusTarget(false);
+        tbContactos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbContactosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbContactos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -329,18 +346,63 @@ public class FrmConsultaBD extends javax.swing.JFrame {
         Contacto contact = new Contacto();
         Contactos contactos = new Contactos();
         
-        contact.setIdContactos(HIDE_ON_CLOSE);
         contact.setNombre(txtNombre.getText());
-        contact.setEdad(Integer.parseInt(txtEdad.getText()));
+        contact.setEdad(Integer.valueOf(txtEdad.getText()));
         contact.setEmail(txtEmal.getText());
         contact.setNumerodeTelefono(txtTelefono.getText());
         
         contactos.SaveContacts(contact);
+        listarDatos();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    public void listarDatos()
+    {
+     String titulos[] = {"ID","Nombre","Edad","Email","Telefono"};
+
+        Double numero [] = new Double[5];
+        
+        DefaultTableModel df_table = new DefaultTableModel(null,titulos);
+        
+        Contactos contactDAO = new Contactos();
+        ArrayList<Contacto> list = contactDAO.listadoContactos();
+        
+        Iterator iterarador = list.iterator();
+        String fila[] = new String[5];
+        while (iterarador.hasNext()) {            
+            Contacto contact = (Contacto)iterarador.next();
+            fila[0] = String.valueOf(contact.getIdContactos());
+            fila[1] = contact.getNombre();
+            fila[2] = String.valueOf(contact.getEdad());
+            fila[3] = contact.getEmail();
+            fila[4] = contact.getNumerodeTelefono();
+            df_table.addRow(fila);
+        }
+        tbContactos.setModel(df_table);
+    }   
+    
     private void btnCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCleanActionPerformed
         limpiar();
+        listarDatos();
     }//GEN-LAST:event_btnCleanActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        listarDatos();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+
+        listarDatos();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void tbContactosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbContactosMouseClicked
+        int datos = tbContactos.getSelectedRow();  
+        txtId.setText(tbContactos.getModel().getValueAt(datos, 0).toString());
+        txtNombre.setText(tbContactos.getModel().getValueAt(datos, 1).toString());
+        txtEdad.setText(tbContactos.getModel().getValueAt(datos, 2).toString());
+        txtEmal.setText(tbContactos.getModel().getValueAt(datos, 3).toString());
+        txtTelefono.setText(tbContactos.getModel().getValueAt(datos, 4).toString());
+    }//GEN-LAST:event_tbContactosMouseClicked
 
     /**
      * @param args the command line arguments

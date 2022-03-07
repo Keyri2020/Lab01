@@ -18,12 +18,11 @@ import javax.swing.JOptionPane;
  * @author MINEDUCYT
  */
 public class Contactos {
-    ArrayList<Contacto> list = null;
     ConexionAMYSQL con = new ConexionAMYSQL();
        
     Connection conexion = con.getConnection();
     public ArrayList <Contacto> listadoContactos(){
-        
+        ArrayList<Contacto> list = null;
         try {
             list = new ArrayList<Contacto>();
             CallableStatement cb = conexion.prepareCall("select * from contactos");
