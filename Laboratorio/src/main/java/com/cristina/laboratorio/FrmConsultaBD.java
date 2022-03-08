@@ -386,12 +386,24 @@ public class FrmConsultaBD extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCleanActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+Contacto contact = new Contacto();
+       Contactos consDAO = new Contactos();
 
+       contact.setIdContactos(Integer.valueOf(txtId.getText()));
+       consDAO.DeleteContact(contact);
         listarDatos();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-
+Contacto contact = new Contacto();
+        Contactos consDAO = new Contactos();
+        
+        contact.setIdContactos(Integer.valueOf(txtId.getText()));
+        contact.setNombre(txtNombre.getText());
+        contact.setEdad(Integer.valueOf(txtEdad.getText()));
+        contact.setEmail(txtEmal.getText());
+        contact.setNumerodeTelefono(txtTelefono.getText());
+        consDAO.UpContacto(contact);
         listarDatos();
     }//GEN-LAST:event_btnActualizarActionPerformed
 

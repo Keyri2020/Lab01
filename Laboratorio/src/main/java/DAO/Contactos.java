@@ -55,5 +55,36 @@ public class Contactos {
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Error " +ex.toString());
         }
+      
+        
     }
+    
+    public void UpContacto(Contacto contact){
+        try {
+                CallableStatement cb = conexion.prepareCall("UPDATE contactos SET Nombre='"+contact.getNombre()+"', Edad='"+contact.getEdad()+"',Email='"+contact.getEmail()+"',NumeroDeTelefono='"+contact.getNumerodeTelefono()+"'  WHERE ID='"+contact.getIdContactos()+"'");
+                cb.execute();
+               
+                JOptionPane.showMessageDialog(null,"Contacto actualizado","Mensaje sistems",1);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null,"Error" + ex.toString(),"Mensaje sistems", 1);
+            }
+    }
+    
+    
+    
+    public void DeleteContact(Contacto contact)
+    {
+          try {
+                CallableStatement cb_s = conexion.prepareCall("DELETE from contactos Where ID ='"+contact.getIdContactos()+"' ");
+                cb_s.execute();
+               
+                JOptionPane.showMessageDialog(null,"Contacto Eliminado");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null,"Error" + ex.toString());
+            }
+    }
+    
+    
+    
+    
 }
